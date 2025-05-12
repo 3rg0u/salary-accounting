@@ -10,4 +10,10 @@ class Falculty extends Model
     use HasFactory;
     protected $fillable = ['fullname', 'abbreviation'];
     public $timestamps = false;
+
+
+    public function profs()
+    {
+        return $this->hasMany(Professor::class, 'falculty', 'abbreviation');
+    }
 }

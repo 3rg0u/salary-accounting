@@ -30,9 +30,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/professor/profile')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        <p class="white-text m-0">Profile</p>
+                    <a href="{{route('admin.stats.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                        <p class="white-text m-0">Thống kê giảng viên</p>
                     </a>
                 </li>
                 <div class="d-flex flex-column justify-content-end">

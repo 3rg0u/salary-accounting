@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\DegreeController;
 use App\Http\Controllers\admin\FalcultyController;
 use App\Http\Controllers\admin\ProfessorController;
+use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\auth\AuthenticateController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,9 +93,17 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             Route::get('/create', [ProfessorController::class, 'create'])->name('admin.professor.create');
             Route::post('/create', [ProfessorController::class, 'store'])->name('admin.professor.create');
 
-            Route::put('/edit/{id}', [DegreeController::class, 'update'])->name('admin.professor.edit');
-            Route::delete('/delete/{id}', [DegreeController::class, 'destroy'])->name('admin.professor.delete');
+            Route::put('/edit/{id}', [ProfessorController::class, 'updateInfor'])->name('admin.professor.edit');
+            Route::put('/pw-edit/{id}', [ProfessorController::class, 'updatePassword'])->name('admin.professor.pw-edit');
+            Route::delete('/delete/{id}', [ProfessorController::class, 'destroy'])->name('admin.professor.delete');
 
+        });
+
+
+        // statistic
+        Route::prefix('/stats')->group(function () {
+            Route::get('/', [StatisticController::class, 'index'])->name('admin.stats.index');
+            Route::get('/show/{id}', [StatisticController::class, 'show'])->name(name: 'admin.stats.show');
         });
     });
 });

@@ -39,13 +39,19 @@
                                     <ion-icon name="create-outline"></ion-icon>
                                     <span>Cập nhật thông tin</span>
                                 </button>
+                                <button type="button" class="btn btn-info btn-sm d-flex align-items-center gap-1"
+                                    data-bs-toggle="modal" data-bs-target="#_editPassword_{{$professor->id}}">
+                                    <ion-icon name="key-outline"></ion-icon>
+                                    <span>Thay đổi mật khẩu</span>
+                                </button>
                                 <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1"
                                     data-bs-toggle="modal" data-bs-target="#_dropInfor_{{$professor->id}}">
                                     <ion-icon name="trash-outline"></ion-icon>
                                     <span>Xóa bỏ</span>
                                 </button>
-                                @include('admin.professor.components.edit', ['professor' => $professor])
+                                @include('admin.professor.components.edit', ['professor' => $professor, 'falculties' => $falculties, 'references' => $references])
                                 @include('admin.professor.components.delete', ['professor' => $professor])
+                                @include('admin.professor.components.mod_pw', ['professor' => $professor])
                             </td>
                         </tr>
                     @endforeach
