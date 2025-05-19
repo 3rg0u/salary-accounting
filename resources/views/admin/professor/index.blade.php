@@ -17,7 +17,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">PID</th>
                         <th scope="col">Họ và tên</th>
                         <th scope="col">Email</th>
                         <th scope="col">Khoa</th>
@@ -28,24 +28,24 @@
                 <tbody>
                     @foreach ($professors as $professor)
                         <tr>
-                            <td>{{$professor->id}}</td>
+                            <td>{{$professor->pid}}</td>
                             <td>{{$professor->fullname}}</td>
                             <td>{{$professor->email}}</td>
                             <td>{{$professor->falculty}}</td>
                             <td>{{$professor->refs}}</td>
                             <td class="d-flex flex-row justify-content-start gap-2">
                                 <button type="button" class="btn btn-info btn-sm d-flex align-items-center gap-1"
-                                    data-bs-toggle="modal" data-bs-target="#_editInfor_{{$professor->id}}">
+                                    data-bs-toggle="modal" data-bs-target="#_editInfor_{{$professor->pid}}">
                                     <ion-icon name="create-outline"></ion-icon>
                                     <span>Cập nhật thông tin</span>
                                 </button>
                                 <button type="button" class="btn btn-info btn-sm d-flex align-items-center gap-1"
-                                    data-bs-toggle="modal" data-bs-target="#_editPassword_{{$professor->id}}">
+                                    data-bs-toggle="modal" data-bs-target="#_editPassword_{{$professor->pid}}">
                                     <ion-icon name="key-outline"></ion-icon>
                                     <span>Thay đổi mật khẩu</span>
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1"
-                                    data-bs-toggle="modal" data-bs-target="#_dropInfor_{{$professor->id}}">
+                                    data-bs-toggle="modal" data-bs-target="#_dropInfor_{{$professor->pid}}">
                                     <ion-icon name="trash-outline"></ion-icon>
                                     <span>Xóa bỏ</span>
                                 </button>

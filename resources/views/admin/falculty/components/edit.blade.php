@@ -20,6 +20,11 @@
                         <input type="text" class="form-control w-100" id="abbreviation" name="abbreviation"
                             value="{{$falculty->abbreviation}}">
                     </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Mô tả (nếu có):</label>
+                        <textarea name="description" class="form-control w-100" id="description" cols="30"
+                            rows="10">{{$falculty->description}}</textarea>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md d-flex align-items-center gap-1"
                             data-bs-dismiss="modal">

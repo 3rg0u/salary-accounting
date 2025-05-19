@@ -1,8 +1,6 @@
 <div align="center">
-<a href="https://github.com/3rg0u/salary-accounting"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=3000&pause=1000&color=93F0F7&center=true&width=720&lines=php+laravel+implementation;salary+accounting" alt="Typing SVG" /></a>
+<a href="https://github.com/3rg0u/salary-accounting"><img src="https://readme-typing-svg.herokuapp.com/?font=Source+Code+Pro&weight=500&size=30&letterSpacing=1.5&duration=3000&pause=1000&color=F7ACAC&center=true&width=720&height=250&lines=salary+accounting" alt="Typing SVG" /></a>
 </div>
-
-<p align="center"><b>salary accounting</b></p>
 
 ### Introduction
 
@@ -11,8 +9,5 @@
 ### Techniques
 
 ### Contributors
-
--   [3rg0u](https://www.github.com/3rg0u)
--
 
 ### Refs

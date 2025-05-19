@@ -20,7 +20,6 @@
                         <th scope="col">ID</th>
                         <th scope="col">Tên đầy đủ</th>
                         <th scope="col">Tên viết tắt</th>
-                        <th scope="col">Hệ số</th>
                         <th scope="col">Hành động</th>
                     </tr>
                 </thead>
@@ -30,7 +29,6 @@
                             <td>{{$degree->id}}</td>
                             <td>{{$degree->fullname}}</td>
                             <td>{{$degree->abbreviation}}</td>
-                            <td>{{$degree->coeff}}</td>
                             <td class="d-flex flex-row justify-content-start gap-2">
                                 <button type="button" class="btn btn-info btn-sm d-flex align-items-center gap-1"
                                     data-bs-toggle="modal" data-bs-target="#_editInfor_{{$degree->id}}">

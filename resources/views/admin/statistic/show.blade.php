@@ -17,7 +17,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">PID</th>
                         <th scope="col">Họ và tên</th>
                         <th scope="col">Email</th>
                         <th scope="col">Học vị</th>
@@ -26,7 +26,7 @@
                 <tbody>
                     @foreach ($profs as $professor)
                         <tr>
-                            <td>{{$professor->id}}</td>
+                            <td>{{$professor->pid}}</td>
                             <td>{{$professor->fullname}}</td>
                             <td>{{$professor->email}}</td>
                             <td>{{$professor->refs}}</td>

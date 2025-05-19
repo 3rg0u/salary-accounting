@@ -25,8 +25,9 @@ class FalcultyController extends Controller
         // dd($request);
         $valid = $request->validate(
             [
-                'fullname' => 'required|unique:falculties',
-                'abbreviation' => 'required:unique:falculties',
+                'fullname' => 'required|string|min:5|unique:falculties',
+                'abbreviation' => 'required|string|min:2|max:15|unique:falculties',
+                'description' => 'nullable'
             ]
         );
         try {
@@ -44,8 +45,9 @@ class FalcultyController extends Controller
             $falculty = Falculty::findOrFail($id);
             $data = $request->validate(
                 [
-                    'fullname' => 'required',
-                    'abbreviation' => 'required'
+                    'fullname' => 'required|string|min:15',
+                    'abbreviation' => 'required|string|min:2',
+                    'description' => 'nullable'
                 ]
             );
 

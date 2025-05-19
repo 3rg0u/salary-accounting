@@ -28,10 +28,6 @@
                             <label for="abbreviation" class="form-label">Tên viết tắt:</label>
                             <input type="text" class="form-control w-100" id="abbreviation" name="abbreviation">
                         </div>
-                        <div class="mb-3">
-                            <label for="coeff" class="form-label">Hệ số:</label>
-                            <input type="number" class="form-control w-100" id="coeff" name="coeff" step="0.01">
-                        </div>
                         <div class="mb-3 d-flex justify-content-end">
                             <button type="submit" class='btn btn-success btn-lg d-flex align-items-center gap-1'>
                                 <ion-icon name="checkmark-circle-outline"></ion-icon>

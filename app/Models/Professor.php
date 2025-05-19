@@ -10,5 +10,5 @@ class Professor extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['fullname', 'falculty', 'email', 'refs'];
+    protected $fillable = ['fullname', 'falculty', 'email', 'refs', 'pid'];
 }

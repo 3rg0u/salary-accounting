@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('fullname')->nullable(false)->unique();
             $table->string('abbreviation')->nullable(false)->unique();
+            $table->text('description')->nullable(true);
         });
     }
 

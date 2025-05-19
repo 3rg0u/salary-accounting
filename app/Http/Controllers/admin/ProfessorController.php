@@ -7,6 +7,8 @@ use App\Models\Degree;
 use App\Models\Falculty;
 use App\Models\Professor;
 use App\Models\User;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
@@ -36,10 +38,10 @@ class ProfessorController extends Controller
     {
         $valid = $request->validate(
             [
-                'fullname' => 'required',
+                'fullname' => 'required|string|min:15|max:255',
                 'email' => 'required|email|unique:users',
-                'password' => 'required',
-                'password-confirm' => 'required',
+                'password' => 'required|string|min:8',
+                'password-confirm' => 'required|string|min:8',
                 'falculty' => 'nullable',
                 'refs' => 'nullable',
             ]
@@ -47,9 +49,7 @@ class ProfessorController extends Controller
         if ($valid['password'] != $valid['password-confirm']) {
             return back()->with('error', 'Mật khẩu không trùng khớp!');
         }
-
         try {
-
             User::create(
                 [
                     'email' => $valid['email'],
@@ -57,16 +57,19 @@ class ProfessorController extends Controller
                     'role' => 'prof'
                 ]
             );
+
+            unset($valid['password']);
+            unset($valid['password-confirm']);
+
+            $valid = array_merge($valid, ['pid' => self::genPID()]); // add pid
+
             Professor::create(
-                [
-                    'fullname' => $valid['fullname'],
-                    'email' => $valid['email'],
-                    'falculty' => $valid['falculty'],
-                    'refs' => $valid['refs']
-                ]
+                $valid
             );
+
+
             return redirect()->route('admin.professor.index')->with('success', 'Thêm thông tin giảng viên thành công!');
-        } catch (Throwable $exc) {
+        } catch (Exception $exc) {
             return back()->with('error', 'Đã xảy ra lỗi!');
         }
     }
@@ -77,8 +80,8 @@ class ProfessorController extends Controller
         try {
             $valid = $request->validate(
                 [
-                    'fullname' => 'nullable',
-                    'email' => 'nullable',
+                    'fullname' => 'nullable|string|min:8|max:255',
+                    'email' => 'nullable|email',
                     'falculty' => 'nullable',
                     'refs' => 'nullable'
                 ]
@@ -86,7 +89,7 @@ class ProfessorController extends Controller
 
 
             //whether email is modified or not
-            $prof = Professor::where('id', $id)->firstOrFail();
+            $prof = Professor::where('pid', $id)->firstOrFail();
             $prof_email = $prof->email;
             if ($valid['email'] != null && $valid['email'] != $prof_email) {
                 $account = User::where('email', $prof_email)->firstOrFail();
@@ -111,14 +114,14 @@ class ProfessorController extends Controller
         try {
             $valid = $request->validate(
                 [
-                    'password' => 'required',
-                    'password-confirm' => 'required'
+                    'password' => 'required|string|min:8',
+                    'password-confirm' => 'required|string|min:8'
                 ]
             );
             if ($valid['password'] != $valid['password-confirm']) {
                 return back()->with('error', 'Mật khẩu không trùng khớp!');
             }
-            $prof_email = Professor::where('id', $id)->firstOrFail()->email;
+            $prof_email = Professor::where('pid', $id)->firstOrFail()->email;
             $account = User::where('email', $prof_email)->firstOrFail();
             $account->update(
                 [
@@ -135,7 +138,7 @@ class ProfessorController extends Controller
     public function destroy($id)
     {
         try {
-            $prof = Professor::where('id', $id)->firstOrFail();
+            $prof = Professor::where('pid', $id)->firstOrFail();
             $account = User::where('email', $prof->email)->firstOrFail();
 
             $prof->delete();
@@ -145,5 +148,10 @@ class ProfessorController extends Controller
         } catch (Throwable $exc) {
             return back()->with('error', 'Đã xảy ra lỗi!');
         }
+    }
+
+    private static function genPID()
+    {
+        return md5((string) Carbon::now());
     }
 }

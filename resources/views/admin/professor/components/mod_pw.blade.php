@@ -1,4 +1,4 @@
-<div class="modal fade" id="_editPassword_{{$professor->id}}" tabindex="-1" aria-labelledby="editInfor"
+<div class="modal fade" id="_editPassword_{{$professor->pid}}" tabindex="-1" aria-labelledby="editInfor"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('admin.professor.pw-edit', ['id' => $professor->id])}}" method="POST">
+                <form action="{{route('admin.professor.pw-edit', ['id' => $professor->pid])}}" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="mb-3">

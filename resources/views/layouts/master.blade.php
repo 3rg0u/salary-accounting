@@ -33,17 +33,17 @@
             title: 'Success',
             text: "{{ session('success') }}",
             timer: 3000,
-            showConfirmButton: false
+            showConfirmButton: true
         });
     </script>
 @endif
 @if ($errors->any())
     <script>
-        let errMsg = @json($errors->all()).join('\n');
+        let errMsg = @json($errors->all()).join('<br>');
         Swal.fire({
             icon: 'error',
             title: 'Đã xảy ra lỗi',
-            text: errMsg,
+            html: errMsg,
             timer: 3000,
             showConfirmButton: false
         });

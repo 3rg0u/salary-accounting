@@ -28,6 +28,11 @@
                             <label for="abbreviation" class="form-label">Tên viết tắt:</label>
                             <input type="text" class="form-control w-100" id="abbreviation" name="abbreviation">
                         </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Mô tả (nếu có):</label>
+                            <textarea name="description" class="form-control w-100" id="description" cols="30"
+                                rows="10"></textarea>
+                        </div>
                         <div class="mb-3 d-flex justify-content-end">
                             <button type="submit" class='btn btn-success btn-lg d-flex align-items-center gap-1'>
                                 <ion-icon name="checkmark-circle-outline"></ion-icon>

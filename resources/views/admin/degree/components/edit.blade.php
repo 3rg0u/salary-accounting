@@ -19,11 +19,6 @@
                         <input type="text" class="form-control w-100" id="abbreviation" name="abbreviation"
                             value="{{$degree->abbreviation}}">
                     </div>
-                    <div class="mb-3">
-                        <label for="coeff" class="form-label">Hệ số:</label>
-                        <input type="number" class="form-control w-100" id="coeff" name="coeff"
-                            value="{{$degree->coeff}}" step="0.01">
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md d-flex align-items-center gap-1"
                             data-bs-dismiss="modal">

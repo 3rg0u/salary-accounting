@@ -110,3 +110,22 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
 
 
 
+
+
+Route::get('/reg', function () {
+    return view('reg');
+});
+
+
+Route::post('/reg', function (Request $request) {
+    $valid = $request->validate(
+        [
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'role' => 'required'
+        ]
+    );
+
+    $valid['password'] = Hash::make($valid['password']);
+    User::create($valid);
+})->name('reg');

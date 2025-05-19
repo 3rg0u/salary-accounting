@@ -26,8 +26,8 @@ class DegreeController extends Controller
     {
         $valid = $request->validate(
             [
-                'fullname' => 'required|unique:falculties',
-                'abbreviation' => 'required:unique:falculties',
+                'fullname' => 'required|string|min:5|unique:falculties',
+                'abbreviation' => 'required|string|min:2|max:15|unique:falculties',
                 'coeff' => 'numeric|min:0|nullable'
             ]
         );
@@ -47,8 +47,8 @@ class DegreeController extends Controller
             $degree = Degree::findOrFail($id);
             $data = $request->validate(
                 [
-                    'fullname' => 'required',
-                    'abbreviation' => 'required',
+                    'fullname' => 'required|string|min:2',
+                    'abbreviation' => 'required|string|min:2|max:15',
                     'coeff' => 'numeric|min:0|nullable'
                 ]
             );

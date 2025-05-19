@@ -39,7 +39,7 @@
                         <div class='mb-3'>
                             <label for="falculty" class="form-controller">Khoa:</label>
                             <select name="falculty" class="form-select">
-                                <option selected disabled hidden>Chọn khoa</option>
+                                <option selected hidden value="">Chọn khoa</option>
                                 @foreach($falculties as $falculty)
                                     <option value="{{ $falculty }}">{{ $falculty }}</option>
                                 @endforeach
@@ -48,7 +48,7 @@
                         <div class='mb-3'>
                             <label for="falculty" class="form-controller">Học vị:</label>
                             <select name="refs" class="form-select">
-                                <option selected disabled hidden>Chọn học vị</option>
+                                <option selected hidden value="">Chọn học vị</option>
                                 @foreach($references as $refs)
                                     <option value="{{ $refs }}">{{ $refs }}</option>
                                 @endforeach

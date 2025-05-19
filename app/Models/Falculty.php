@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Falculty extends Model
 {
     use HasFactory;
-    protected $fillable = ['fullname', 'abbreviation'];
+    protected $fillable = ['fullname', 'abbreviation', 'description'];
     public $timestamps = false;
 
 

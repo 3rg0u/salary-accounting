@@ -14,6 +14,7 @@ return new class extends Migration {
     {
         Schema::create('professors', function (Blueprint $table) {
             $table->id();
+            $table->string('pid')->unique()->nullable(false);
             $table->string('fullname')->nullable(false);
             $table->string('falculty')->nullable(true);
             $table->foreign('falculty')->references('abbreviation')->on('falculties')->nullOnDelete()->cascadeOnUpdate();
