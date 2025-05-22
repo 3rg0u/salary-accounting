@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Falculty;
+use Exception;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -32,8 +33,9 @@ class FalcultyController extends Controller
         );
         try {
             Falculty::create($valid);
-        } catch (Throwable $th) {
-            return back()->with('error', $th->getMessage());
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
 
         return redirect()->route('admin.falculty.index')->with('success', 'Tạo khoa mới thành công!');
@@ -55,7 +57,8 @@ class FalcultyController extends Controller
             $falculty->update($falculty->getDirty());
             return back()->with('success', 'Cập nhật thông tin thành công!');
         } catch (Throwable $exc) {
-            return back()->with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
@@ -66,7 +69,8 @@ class FalcultyController extends Controller
             $falculty->delete();
             return back()->with('success', 'Xóa thông tin hoàn tất!');
         } catch (Throwable $exc) {
-            return back()->with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 }

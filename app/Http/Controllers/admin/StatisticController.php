@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Falculty;
 use App\Models\Professor;
+use Exception;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -24,8 +25,9 @@ class StatisticController extends Controller
             $fal = Falculty::where('id', $id)->firstOrFail();
             $profs = Professor::where('falculty', $fal->abbreviation)->get();
             return view('admin.statistic.show', ['profs' => $profs, 'falculty' => $fal]);
-        } catch (Throwable $exc) {
-            return back()->with('error', 'Đã có lỗi xảy ra!');
+        } catch (Exception $exc) {
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 }

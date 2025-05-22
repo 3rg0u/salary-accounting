@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\admin\AcademicYearController;
+use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\DegreeController;
 use App\Http\Controllers\admin\FalcultyController;
 use App\Http\Controllers\admin\ProfessorController;
 use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\auth\AuthenticateController;
+use App\Models\AcademicYear;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -59,7 +62,7 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             return redirect()->route('admin.falculty.index');
         });
 
-
+        // falculties mng
         Route::prefix('/falculties')->group(function () {
             Route::get('/', [FalcultyController::class, 'index'])->name('admin.falculty.index');
 
@@ -104,6 +107,19 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
         Route::prefix('/stats')->group(function () {
             Route::get('/', [StatisticController::class, 'index'])->name('admin.stats.index');
             Route::get('/show/{id}', [StatisticController::class, 'show'])->name(name: 'admin.stats.show');
+        });
+
+        // academic affair section
+        Route::prefix('/affairs')->group(function () {
+            Route::get('/', [AcademicYearController::class, 'index'])->name('admin.affairs.index');
+            Route::get('/create', [AcademicYearController::class, 'create'])->name('admin.affairs.create');
+            Route::post('/create', [AcademicYearController::class, 'store'])->name('admin.affairs.create');
+        });
+
+
+        // courses management
+        Route::prefix('/courses')->group(function () {
+            Route::get('/', [CourseController::class, 'index'])->name('admin.courses.index');
         });
     });
 });

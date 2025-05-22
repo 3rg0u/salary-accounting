@@ -35,6 +35,18 @@
                         <p class="white-text m-0">Thống kê giảng viên</p>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.affairs.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                        <p class="white-text m-0">Quản lý học vụ</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.affairs.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="stats-chart-outline"></ion-icon>
+                        <p class="white-text m-0">Quản lý học vụ</p>
+                    </a>
+                </li>
                 <div class="d-flex flex-column justify-content-end">
                     <form action="{{url('/signout')}}" method="post">
                         @csrf

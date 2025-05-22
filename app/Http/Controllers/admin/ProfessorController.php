@@ -47,7 +47,8 @@ class ProfessorController extends Controller
             ]
         );
         if ($valid['password'] != $valid['password-confirm']) {
-            return back()->with('error', 'Mật khẩu không trùng khớp!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
         try {
             User::create(
@@ -70,7 +71,8 @@ class ProfessorController extends Controller
 
             return redirect()->route('admin.professor.index')->with('success', 'Thêm thông tin giảng viên thành công!');
         } catch (Exception $exc) {
-            return back()->with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
@@ -104,8 +106,9 @@ class ProfessorController extends Controller
             $prof->fill($valid);
             $prof->update($prof->getDirty());
             return back()->with('success', 'Cập nhật thông tin thành công!');
-        } catch (Throwable $exc) {
-            return back()->with('error', 'Đã có lỗi xảy ra!');
+        } catch (Exception $exc) {
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
@@ -129,8 +132,9 @@ class ProfessorController extends Controller
                 ]
             );
             return back()->with('success', 'Cập nhật mật khẩu thành công!');
-        } catch (Throwable $exc) {
-            return back()->with('error', 'Đã có lỗi xảy ra!');
+        } catch (Exception $exc) {
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
@@ -146,7 +150,8 @@ class ProfessorController extends Controller
 
             return back()->with('success', 'Xóa thông tin thành công!');
         } catch (Throwable $exc) {
-            return back()->with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 

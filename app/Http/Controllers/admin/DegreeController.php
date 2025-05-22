@@ -36,7 +36,8 @@ class DegreeController extends Controller
             Degree::create($valid);
             return redirect()->route('admin.degree.index')->with('success', 'Thêm danh mục mới thành công!');
         } catch (Throwable $exc) {
-            return back() - with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
@@ -57,7 +58,8 @@ class DegreeController extends Controller
             $degree->update($degree->getDirty());
             return back()->with('success', 'Cập nhật thông tin thành công!');
         } catch (Throwable $exc) {
-            return back()->with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
@@ -69,7 +71,8 @@ class DegreeController extends Controller
             $degree->delete();
             return back()->with('success', 'Xóa thông tin hoàn tất!');
         } catch (Throwable $exc) {
-            return back()->with('error', 'Đã xảy ra lỗi!');
+            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+
         }
     }
 
