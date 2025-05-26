@@ -47,7 +47,7 @@ class CourseOfferingController extends Controller
             $valid = $request->validate(
                 [
                     'course_code' => 'required',
-                    'cls_nums' => 'required|numeric|min:1',
+                    'cls_nums' => 'required|numeric|min:1|max:20',
                     'std_nums' => 'required|numeric|min:15|max:100'
                 ]
             );

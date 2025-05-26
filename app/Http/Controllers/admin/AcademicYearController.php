@@ -45,9 +45,8 @@ class AcademicYearController extends Controller
             if ($start->lt(Carbon::now()) || $end->lt(Carbon::now()))
                 return back()->withErrors(['error' => "Không thể mở năm học mới trong quá khứ!"]);
 
-            $avail = AcademicYear::whereYear('start', $start->year)->exists() || AcademicYear::whereYear('end', operator: $end->year)->exists();
-
-            if ($avail)
+            $conflict = AcademicYear::where('start', '<', $end)->where('end', '>', $start)->exists();
+            if ($conflict)
                 return back()->withErrors('Năm học mới được mở không được trùng với những năm học khác!');
 
 
