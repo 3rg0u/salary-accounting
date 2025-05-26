@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->nullable(false);
+            $table->string('name')->unique()->nullable(false);
             $table->string('falculty')->nullable(true);
             $table->foreign('falculty')->references('abbreviation')->on('falculties')->nullOnDelete()->cascadeOnUpdate();
             $table->double('coeff')->nullable(true);

@@ -38,7 +38,7 @@ class ProfessorController extends Controller
     {
         $valid = $request->validate(
             [
-                'fullname' => 'required|string|min:15|max:255',
+                'fullname' => 'required|string|min:8|max:255',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:8',
                 'password-confirm' => 'required|string|min:8',
@@ -47,7 +47,7 @@ class ProfessorController extends Controller
             ]
         );
         if ($valid['password'] != $valid['password-confirm']) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+            return back()->withErrors(['error' => 'Mật khẩu không trùng khớp!']);
 
         }
         try {
@@ -70,8 +70,8 @@ class ProfessorController extends Controller
 
 
             return redirect()->route('admin.professor.index')->with('success', 'Thêm thông tin giảng viên thành công!');
-        } catch (Exception $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
@@ -106,8 +106,8 @@ class ProfessorController extends Controller
             $prof->fill($valid);
             $prof->update($prof->getDirty());
             return back()->with('success', 'Cập nhật thông tin thành công!');
-        } catch (Exception $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
@@ -132,8 +132,8 @@ class ProfessorController extends Controller
                 ]
             );
             return back()->with('success', 'Cập nhật mật khẩu thành công!');
-        } catch (Exception $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
@@ -149,14 +149,14 @@ class ProfessorController extends Controller
             $account->delete();
 
             return back()->with('success', 'Xóa thông tin thành công!');
-        } catch (Throwable $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
 
     private static function genPID()
     {
-        return md5((string) Carbon::now());
+        return 'PKU' . '-' . md5(Carbon::now());
     }
 }

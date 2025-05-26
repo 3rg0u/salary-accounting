@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Degree;
+use Exception;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -35,8 +36,8 @@ class DegreeController extends Controller
         try {
             Degree::create($valid);
             return redirect()->route('admin.degree.index')->with('success', 'Thêm danh mục mới thành công!');
-        } catch (Throwable $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
@@ -57,8 +58,8 @@ class DegreeController extends Controller
             $degree->fill($data);
             $degree->update($degree->getDirty());
             return back()->with('success', 'Cập nhật thông tin thành công!');
-        } catch (Throwable $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
@@ -70,10 +71,13 @@ class DegreeController extends Controller
             $degree = Degree::findOrFail($id);
             $degree->delete();
             return back()->with('success', 'Xóa thông tin hoàn tất!');
-        } catch (Throwable $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
+
+
+
 
 }

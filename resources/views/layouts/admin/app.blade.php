@@ -14,37 +14,43 @@
                 <li>
                     <a href="{{route('admin.falculty.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
                         <ion-icon name="albums-outline"></ion-icon>
-                        <p class="white-text m-0">Quản Lý Khoa</p>
+                        <p class="white-text m-0">QL Khoa</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.degree.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
-                        <ion-icon name="book-outline"></ion-icon>
-                        <p class="white-text m-0">Quản Lý Bằng Cấp</p>
+                        <ion-icon name="newspaper-outline"></ion-icon>
+                        <p class="white-text m-0">QL Bằng Cấp</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.professor.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
                         <ion-icon name="people-outline"></ion-icon>
-                        <p class="white-text m-0">Quản Lý Giảng Viên</p>
+                        <p class="white-text m-0">QL Giảng Viên</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.stats.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
-                        <ion-icon name="stats-chart-outline"></ion-icon>
-                        <p class="white-text m-0">Thống kê giảng viên</p>
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                        <p class="white-text m-0">TK Giảng Viên</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.affairs.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
-                        <ion-icon name="stats-chart-outline"></ion-icon>
-                        <p class="white-text m-0">Quản lý học vụ</p>
+                        <ion-icon name="calendar-number-outline"></ion-icon>
+                        <p class="white-text m-0">QL Học Vụ</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.affairs.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
-                        <ion-icon name="stats-chart-outline"></ion-icon>
-                        <p class="white-text m-0">Quản lý học vụ</p>
+                    <a href="{{route('admin.courses.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="book-outline"></ion-icon>
+                        <p class="white-text m-0">QL Học Phần</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.classes.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="easel-outline"></ion-icon>
+                        <p class="white-text m-0">QL Lớp Học Phần</p>
                     </a>
                 </li>
                 <div class="d-flex flex-column justify-content-end">

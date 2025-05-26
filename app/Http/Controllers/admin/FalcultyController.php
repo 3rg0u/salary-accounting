@@ -34,7 +34,7 @@ class FalcultyController extends Controller
         try {
             Falculty::create($valid);
         } catch (Exception $err) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
 
@@ -56,8 +56,8 @@ class FalcultyController extends Controller
             $falculty->fill($data);
             $falculty->update($falculty->getDirty());
             return back()->with('success', 'Cập nhật thông tin thành công!');
-        } catch (Throwable $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }
@@ -68,8 +68,8 @@ class FalcultyController extends Controller
             $falculty = Falculty::findOrFail($id);
             $falculty->delete();
             return back()->with('success', 'Xóa thông tin hoàn tất!');
-        } catch (Throwable $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }

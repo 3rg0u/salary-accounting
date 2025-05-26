@@ -15,6 +15,13 @@ class User extends Authenticatable
     const ADMIN = 'admin';
     const PROFESSOR = 'prof';
     const ACCOUNTANT = 'accountant';
+
+
+
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
     public function isAdmin()
     {
         return $this->role == self::ADMIN;

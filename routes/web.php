@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\admin\AcademicYearController;
 use App\Http\Controllers\admin\CourseController;
+use App\Http\Controllers\admin\CourseOfferingController;
 use App\Http\Controllers\admin\DegreeController;
 use App\Http\Controllers\admin\FalcultyController;
 use App\Http\Controllers\admin\ProfessorController;
+use App\Http\Controllers\admin\SemesterController;
 use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\auth\AuthenticateController;
 use App\Models\AcademicYear;
+use App\Models\Course;
+use App\Models\Falculty;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -114,13 +118,30 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             Route::get('/', [AcademicYearController::class, 'index'])->name('admin.affairs.index');
             Route::get('/create', [AcademicYearController::class, 'create'])->name('admin.affairs.create');
             Route::post('/create', [AcademicYearController::class, 'store'])->name('admin.affairs.create');
+            Route::get('/show/{code}', [AcademicYearController::class, 'show'])->name('admin.affairs.show');
+            Route::post('/semesters/create/{year}', [SemesterController::class, 'store'])->name('admin.affairs.semester.create');
         });
 
 
         // courses management
         Route::prefix('/courses')->group(function () {
             Route::get('/', [CourseController::class, 'index'])->name('admin.courses.index');
+            Route::get('/show/{falculty}', [CourseController::class, 'show'])->name('admin.courses.show');
+            Route::post('/create/{falculty}', [CourseController::class, 'store'])->name('admin.courses.create');
+            Route::put('/update/{code}', [CourseController::class, 'update'])->name('admin.courses.update');
+            Route::delete('/delete/{code}', [CourseController::class, 'destroy'])->name('admin.courses.delete');
         });
+
+
+        Route::prefix('/classes')->group(function () {
+            Route::get('/', [CourseOfferingController::class, 'index'])->name('admin.classes.index');
+            Route::get('/show/{semes}/{falculty}', [CourseOfferingController::class, 'show'])->name('admin.classes.show');
+            Route::post('/create/{falculty}', [CourseOfferingController::class, 'store'])->name('admin.classes.create');
+            Route::get('/details/{semes}/{course}', [CourseOfferingController::class, 'detail'])->name('admin.classes.detail');
+            Route::put('/assign/{class}', [CourseOfferingController::class, 'assign'])->name('admin.classes.assign');
+            Route::delete('/close/{class}', [CourseOfferingController::class, 'close'])->name('admin.classes.close');
+        });
+
     });
 });
 
@@ -145,3 +166,9 @@ Route::post('/reg', function (Request $request) {
     $valid['password'] = Hash::make($valid['password']);
     User::create($valid);
 })->name('reg');
+
+
+
+Route::get('/test', function () {
+    echo ucwords('đại số tuyến tính');
+});

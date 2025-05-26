@@ -15,7 +15,7 @@ class StatisticController extends Controller
 
     public function index()
     {
-        $counts = Falculty::withCount('profs')->get();
+        $counts = Falculty::withCount('professors')->get();
         return view('admin.statistic.index', ['data' => $counts]);
     }
 
@@ -25,8 +25,8 @@ class StatisticController extends Controller
             $fal = Falculty::where('id', $id)->firstOrFail();
             $profs = Professor::where('falculty', $fal->abbreviation)->get();
             return view('admin.statistic.show', ['profs' => $profs, 'falculty' => $fal]);
-        } catch (Exception $exc) {
-            return back()->withErrors(['error' => 'Đã có lỗi xảy ra!']);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
 
         }
     }

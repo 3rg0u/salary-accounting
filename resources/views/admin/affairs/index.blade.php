@@ -15,13 +15,17 @@
         </div>
         <div class="content-display">
             @if ($years->count() == 0)
-                <p>Hien chua co nam hoc nao duoc mo</p>
-            @else
-                @foreach ($years as $year)
-                    <div class="fluid-container">
+                <div class="fluid-continer d-flex align-items-center justify-content-center">
+                    <p class="h3">Hiện tại chưa có năm học nào được mở</p>
 
-                    </div>
-                @endforeach
+                </div>
+
+            @else
+                <div class="fluid-container d-flex flex-row gap-5">
+                    @foreach ($years as $year)
+                        @include('admin.affairs.components.card', ['data' => $year])
+                    @endforeach
+                </div>
             @endif
         </div>
     </div>
