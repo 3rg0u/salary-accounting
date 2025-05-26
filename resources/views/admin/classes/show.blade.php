@@ -53,8 +53,7 @@
                                     <ion-icon name="stop-circle-outline"></ion-icon>
                                     <span>Đóng tất cả các lớp</span>
                                 </button>
-                                @include('admin.courses.components.edit', ['course' => $course])
-                                @include('admin.courses.components.delete', ['course' => $course])
+                                @include('admin.classes.components.closeall', ['course' => $course])
                             </td>
                         </tr>
                     @endforeach

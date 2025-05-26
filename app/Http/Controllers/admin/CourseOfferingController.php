@@ -11,6 +11,7 @@ use App\Models\Semester;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Exceptions\BackedEnumCaseNotFoundException;
 use PhpParser\Node\Expr;
 use Symfony\Component\Process\ExecutableFinder;
 
@@ -105,6 +106,17 @@ class CourseOfferingController extends Controller
         try {
             OfferedCourse::firstWhere('code', $class)->delete();
             return back()->with('success', 'Đóng lớp hoàn tất!');
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
+        }
+    }
+
+
+    public function closeall($course)
+    {
+        try {
+            OfferedCourse::where('course_code', $course)->delete();
+            return back()->with('success', 'Đóng học phần thành công!');
         } catch (Exception $err) {
             return back()->withErrors(['error' => $err->getMessage()]);
         }

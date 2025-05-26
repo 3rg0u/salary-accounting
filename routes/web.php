@@ -140,6 +140,7 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             Route::get('/details/{semes}/{course}', [CourseOfferingController::class, 'detail'])->name('admin.classes.detail');
             Route::put('/assign/{class}', [CourseOfferingController::class, 'assign'])->name('admin.classes.assign');
             Route::delete('/close/{class}', [CourseOfferingController::class, 'close'])->name('admin.classes.close');
+            Route::delete('/close-all/{course}', [CourseOfferingController::class, 'closeall'])->name('admin.classes.closeall');
         });
 
     });
