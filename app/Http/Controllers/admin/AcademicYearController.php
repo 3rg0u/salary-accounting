@@ -41,7 +41,8 @@ class AcademicYearController extends Controller
             $start = Carbon::parse($valid['start']);
             $end = Carbon::parse($valid['end']);
 
-            if ($start->lt(Carbon::now() || $end->lt(Carbon::now())))
+
+            if ($start->lt(Carbon::now()) || $end->lt(Carbon::now()))
                 return back()->withErrors(['error' => "Không thể mở năm học mới trong quá khứ!"]);
 
             $avail = AcademicYear::whereYear('start', $start->year)->exists() || AcademicYear::whereYear('end', operator: $end->year)->exists();

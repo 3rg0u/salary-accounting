@@ -71,8 +71,8 @@
             icon: 'error',
             title: 'Đã xảy ra lỗi',
             html: errMsg,
-            timer: 3000,
-            showConfirmButton: false
+            timer: 6000,
+            showConfirmButton: true
         });
     </script>
 @endif
