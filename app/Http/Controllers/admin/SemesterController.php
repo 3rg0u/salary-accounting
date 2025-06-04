@@ -32,6 +32,10 @@ class SemesterController extends Controller
             $year_start = Carbon::parse($aca_year->start);
             $year_end = Carbon::parse($aca_year->end);
 
+            $conflict = Semester::where('start', '<', $end)->where('end', '>', $start)->exists();
+            if ($conflict)
+                return back()->withErrors('Đã có kì học khác đang diễn ra trong thời gian này!');
+
 
             if ($start->lte($year_start))
                 return back()->withErrors(['errors' => 'Ngày bắt đầu học kì không được nằm trước ngày bắt đầu của năm học!']);

@@ -53,6 +53,12 @@
                         <p class="white-text m-0">QL Lớp Học Phần</p>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.classes.history')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="easel-outline"></ion-icon>
+                        <p class="white-text m-0">Lịch sử học vụ</p>
+                    </a>
+                </li>
                 <div class="d-flex flex-column justify-content-end">
                     <form action="{{url('/signout')}}" method="post">
                         @csrf

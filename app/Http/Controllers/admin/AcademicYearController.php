@@ -47,7 +47,7 @@ class AcademicYearController extends Controller
 
             $conflict = AcademicYear::where('start', '<', $end)->where('end', '>', $start)->exists();
             if ($conflict)
-                return back()->withErrors('Năm học mới được mở không được trùng với những năm học khác!');
+                return back()->withErrors('Đã có năm học khác diễn ra trong thời gian này!');
 
 
 

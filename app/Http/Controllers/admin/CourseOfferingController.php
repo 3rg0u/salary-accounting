@@ -123,6 +123,22 @@ class CourseOfferingController extends Controller
     }
 
 
+    public function history()
+    {
+        $years = AcademicYear::all();
+        return view('admin.classes.history.index', ['years' => $years]);
+    }
+
+    public function historyShow($semester)
+    {
+        try {
+            $s = Semester::firstWhere('code', $semester);
+            return view('admin.classes.history.his_class', ['semester' => $s]);
+        } catch (Exception $err) {
+            return back()->withErrors(['error' => $err->getMessage()]);
+        }
+    }
+
     public function genCode()
     {
         return 'FSE' . '-' . md5(Carbon::now());

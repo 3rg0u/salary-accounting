@@ -8,7 +8,6 @@ use App\Models\Falculty;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr;
 
 class CourseController extends Controller
 {
@@ -38,8 +37,8 @@ class CourseController extends Controller
             $valid = $request->validate(
                 [
                     'name' => 'required|string|min:5|max:50',
-                    'cred_hours' => 'required|numeric|min:1|max:10',
-                    'cls_hours' => 'required|numeric|min:15|max:45',
+                    'cred_hours' => 'required|integer|min:1|max:10',
+                    'cls_hours' => 'required|integer|min:15|max:45',
                     'coeff' => 'nullable|numeric|min:1|max:3'
                 ]
             );
@@ -49,7 +48,7 @@ class CourseController extends Controller
                 $valid
             );
 
-            return back()->with('success', 'Thêm môn học thành công!');
+            return back()->with('success', 'Thêm học phần thành công!');
 
 
         } catch (Exception $err) {

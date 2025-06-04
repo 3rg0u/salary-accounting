@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AcademicYearController;
+use App\Http\Controllers\admin\AccountantController;
 use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\admin\CourseOfferingController;
 use App\Http\Controllers\admin\DegreeController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\auth\AuthenticateController;
 use App\Models\AcademicYear;
 use App\Models\Course;
 use App\Models\Falculty;
+use App\Models\Semester;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -141,13 +143,29 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             Route::put('/assign/{class}', [CourseOfferingController::class, 'assign'])->name('admin.classes.assign');
             Route::delete('/close/{class}', [CourseOfferingController::class, 'close'])->name('admin.classes.close');
             Route::delete('/close-all/{course}', [CourseOfferingController::class, 'closeall'])->name('admin.classes.closeall');
+            Route::get('/history', [CourseOfferingController::class, 'history'])->name('admin.classes.history');
+            Route::get('/history/show/{semester}', [CourseOfferingController::class, 'historyShow'])->name('admin.classes.history.show');
+        });
+
+
+        Route::prefix('/accounts')->group(function () {
+            Route::get('/', [AccountantController::class, 'index'])->name('admin.account.index');
+            Route::post('/', [AccountantController::class, 'store'])->name('admin.account.create');
         });
 
     });
 });
 
 
+Route::middleware(['auth', 'accountant.assert'])->group(function () {
+    Route::prefix('/accountant')->group(function () {
+        Route::get('/', function () {
+            return 'abc';
+        })->name('accountant.index');
 
+
+    });
+});
 
 
 Route::get('/reg', function () {
@@ -171,5 +189,5 @@ Route::post('/reg', function (Request $request) {
 
 
 Route::get('/test', function () {
-    echo ucwords('đại số tuyến tính');
+    return Semester::first()->openedClasses;
 });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\admin\CourseOfferingController;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +31,13 @@ class Semester extends Model
         $now = Carbon::now();
         return $query->where('start', '<=', $now)->where('end', '>=', $now)->first();
     }
+
+
+    public function openedClasses()
+    {
+        return $this->hasMany(OfferedCourse::class, 'sem_code', 'code');
+    }
+
+
 
 }

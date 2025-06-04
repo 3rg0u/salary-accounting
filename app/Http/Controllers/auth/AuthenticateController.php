@@ -30,12 +30,13 @@ class AuthenticateController extends Controller
              * @var User $user
              */
             $user = Auth::user();
+            dd($user);
             if ($user->isProfessor()) {
                 return redirect()->route('professor');
             } else if ($user->isAdmin()) {
                 return redirect()->route('admin.falculty.index');
             }
-            return redirect()->route('accountant');
+            return redirect()->route('accountant.index');
         }
 
         return back()->withErrors([

@@ -2,499 +2,212 @@
 
 @section('body')
 
-    <div id="logo">
-        <span class="big-logo">ACCOUNTANT</span>
-    </div>
-    <div id="left-menu">
-        <ul>
-            <li>
-                <a href="">
-                    <ion-icon name="albums-outline"></ion-icon>
-                    <span>Quản lý khoa</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <ion-icon name="book-outline"></ion-icon>
-                    <span>Quản lý danh mục bằng cấp</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <ion-icon name="people-outline"></ion-icon>
-                    <span>Quản lý giáo viên</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <ion-icon name="stats-chart-outline"></ion-icon>
-                    <span>Thống kê giáo viên</span>
-                </a>
-            </li>
-        </ul>
-    </div>
 
+    <div id="wrapper">
 
-    <div class="main-content">
-        @yield('content')
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <span class="text-white h5"><b>ADMIN</b></span>
+                </li>
+                <li>
+                    <a href="{{route('admin.falculty.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="albums-outline"></ion-icon>
+                        <p class="white-text m-0">QL Khoa</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.degree.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="newspaper-outline"></ion-icon>
+                        <p class="white-text m-0">QL Bằng Cấp</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.professor.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="people-outline"></ion-icon>
+                        <p class="white-text m-0">QL Giảng Viên</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.stats.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="bar-chart-outline"></ion-icon>
+                        <p class="white-text m-0">TK Giảng Viên</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.affairs.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="calendar-number-outline"></ion-icon>
+                        <p class="white-text m-0">QL Học Vụ</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.courses.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="book-outline"></ion-icon>
+                        <p class="white-text m-0">QL Học Phần</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.classes.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="easel-outline"></ion-icon>
+                        <p class="white-text m-0">QL Lớp Học Phần</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.classes.history')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="easel-outline"></ion-icon>
+                        <p class="white-text m-0">Lịch sử học vụ</p>
+                    </a>
+                </li>
+                <div class="d-flex flex-column justify-content-end">
+                    <form action="{{url('/signout')}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-md d-flex gap-1 align-items-center ms-4">
+                            <p class="white-text m-0">Sign out</p>
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </button>
+                    </form>
+                </div>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
+    <!-- /#wrapper -->
+
 
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            background-color: #f6f7fb;
-            color: #888da8;
-            letter-spacing: 0.2px;
-            font-family: 'Roboto', sans-serif;
-            padding: 0;
-            margin: 0;
-        }
-
-        a,
-        p,
-        span,
-        div,
-        li,
-        td {
-            font-weight: 300 !important;
-        }
-
-        a {
-            text-decoration: none;
-            text-transform: capitalize;
-        }
-
-        ::placeholder {
-            color: #ccc !important;
-            font-weight: 300;
-        }
-
-        :-ms-input-placeholder {
-            /* Internet Explorer 10-11 */
-            color: #ccc !important;
-            font-weight: 300;
-        }
-
-        ::-ms-input-placeholder {
-            /* Microsoft Edge */
-            color: #ccc !important;
-            font-weight: 300;
-        }
-
-        input {
-            border-color: #d8e0e5;
-            border-radius: 2px !important;
-            box-shadow: none !important;
-            font-weight: 300 !important;
-        }
-
-        .form-control:disabled,
-        .form-control[readonly] {
-            background-color: #f6f7fb;
-        }
-
-        button.btn {
-            border-radius: 2px !important;
-            box-shadow: none !important;
-        }
-
-        button.btn.btn-primary {
-            background-color: #0e9aee !important;
-        }
-
-        button.btn.btn-primary:hover {
-            background-color: #0879c8 !important;
-        }
-
-        #left-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            background-color: #313644;
-            overflow-y: auto;
-            height: 100vh;
-            border-right: 1px solid #e6ecf5;
-            margin-top: 60px;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
             overflow-x: hidden;
-            z-index: 2;
         }
 
-        #left-menu.small-left-menu,
-        #logo.small-left-menu {
-            width: 60px;
+        /* Toggle Styles */
+
+        #wrapper {
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
         }
 
-        #left-menu ul {
-            padding: 0;
+        #wrapper.toggled {
+            padding-left: 250px;
+        }
+
+        #sidebar-wrapper {
+            z-index: 1000;
+            position: fixed;
+            left: 250px;
+            width: 0;
+            height: 100%;
+            margin-left: -250px;
+            overflow-y: auto;
+            background-color: #223771;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            width: 250px;
+        }
+
+        #page-content-wrapper {
+            width: 100%;
+            position: absolute;
+            padding: 15px;
+        }
+
+        #wrapper.toggled #page-content-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        /* Sidebar Styles */
+
+        .sidebar-nav {
+            position: absolute;
+            top: 0;
+            width: 250px;
             margin: 0;
+            padding: 0;
+            list-style: none;
         }
 
-        #left-menu ul li {
-            padding: 0 10px;
+        .sidebar-nav li {
+            text-indent: 20px;
+            line-height: 40px;
+        }
+
+        .sidebar-nav li a {
             display: block;
-            position: relative;
-        }
-
-        #left-menu>ul>li {
-            margin: 15px 0;
-        }
-
-        #left-menu ul li a {
-            color: #99abb4;
-            width: 100%;
-            display: inline-block;
-            width: 260px;
-            height: 37px;
-            position: relative;
-        }
-
-
-        #left-menu ul li a i {
-            font-size: 22px;
-            text-align: center;
-            width: 35px;
-            height: 35px;
-            display: inline-block;
-            -webkit-transition: all 0.3s ease;
-            -o-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-        }
-
-        #left-menu ul li:hover a span {
-            color: #0e9aee;
-        }
-
-        #left-menu ul li:hover a i {
-            color: #0e9aee;
-        }
-
-        #left-menu ul li a span {
-            width: 100%;
-            height: 35px;
-            padding-left: 10px;
-            color: #99abb4;
-            font-weight: 300;
-            -webkit-transition: all 0.3s ease;
-            -o-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-        }
-
-        #left-menu ul li.active a {
-            border-bottom: 2px solid #0e9aee;
-        }
-
-        #left-menu ul li.active a span {
+            text-decoration: none;
             color: #fff;
         }
 
-        #left-menu ul li.active a i {
-            background-color: #0e9aee;
+        .sidebar-nav li a:hover {
+            text-decoration: none;
             color: #fff;
+            background-color: #f88e4d;
         }
 
-
-        #left-menu li.has-sub ul {
-            background-color: #454e62;
-            margin: 0 -10px;
-            padding-left: 45px;
-            height: 0;
-            overflow: hidden;
-            -webkit-transition: all 0.3s ease;
-            -o-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-        }
-
-        #left-menu li ul.open {
-            /*    height: 140px;*/
-        }
-
-        #left-menu li.has-sub ul>li {
-            padding-top: 10px;
-        }
-
-        a:hover {
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus {
             text-decoration: none;
         }
 
-        #logo {
-            position: fixed;
-            top: 0;
-            z-index: 2;
-            left: 0;
-            background-color: #464e62;
-            border-color: #464e62;
-            height: 60px;
-            width: 280px;
-            font-size: 30px;
-            line-height: 2em;
-            border-right: 1px solid #e6ecf5;
-            z-index: 4;
-            color: #fff;
-            padding-left: 15px;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
-            overflow: hidden;
-        }
-
-
-        #header {
-            background-color: #fff;
-            height: 60px;
-            border-bottom: 1px solid #e6ecf5;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 3;
-        }
-
-        #header .header-left {
-            padding-left: 300px;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
-        }
-
-        #header .header-right {
-            padding-right: 40px;
-        }
-
-        #header .header-right i,
-        #header .header-left i {
-            font-size: 30px;
-            line-height: 2em;
-            padding: 0 5px;
-            cursor: pointer;
-        }
-
-        #main-content {
-            min-height: calc(100vh - 60px);
-            clear: both;
-        }
-
-        #page-container {
-            padding-left: 300px;
-            padding-top: 80px;
-            padding-right: 25px;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
-        }
-
-        #page-container.small-left-menu,
-        #header .header-left.small-left-menu {
-            padding-left: 80px;
-        }
-
-        .card {
-            border: 1px solid #e6ecf5;
-            margin-bottom: 1em;
-            font-weight: 300;
-        }
-
-        .card .title {
-            padding: 15px 20px;
-            border-bottom: 1px solid #e6ecf5;
-            margin-bottom: 10px;
-            color: #000;
+        .sidebar-nav>.sidebar-brand {
+            height: 65px;
             font-size: 18px;
+            line-height: 60px;
         }
 
-        #show-lable {
-            opacity: 0;
-            visibility: hidden;
-            left: 80px;
-            font-weight: 300;
-            padding: 6px 15px;
-            background-color: #0e9aee;
-            position: fixed;
+        .sidebar-nav>.sidebar-brand a {
+            color: #999999;
+        }
+
+        .sidebar-nav>.sidebar-brand a:hover {
             color: #fff;
-            -webkit-transition: all 0.3s ease-in-out;
-            -o-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
+            background: none;
         }
 
-        #left-menu.small-left-menu li.has-sub::after {
-            content: '';
-        }
-
-        #left-menu.small-left-menu li.has-sub ul {
-            position: fixed;
-            width: 280px;
-            z-index: 123;
-            height: 0;
-            left: 69px;
-            padding-left: 15px;
-        }
-
-        @media only screen and (max-width: 992px) {
-
-            #left-menu,
-            #logo {
-                width: 60px;
+        @media(min-width:768px) {
+            #wrapper {
+                padding-left: 250px;
             }
 
-            #page-container,
-            #header .header-left {
-                padding-left: 80px;
+            #wrapper.toggled {
+                padding-left: 0;
             }
 
-            #toggle-left-menu,
-            .big-logo {
-                display: none;
+            #sidebar-wrapper {
+                width: 250px;
             }
 
-            /*
-                                                                                                #logo{
-                                                                                                    padding: 0;
-                                                                                                    padding-left: 3px;
-                                                                                                }
-                                                                                                .small-logo{
-                                                                                                    display: block;
-                                                                                                }
-                                                                                            */
-
-        }
-
-        @media only screen and (min-width: 992px) {
-            #left-menu li.has-sub::after {
-                font-family: "Ionicons";
-                content: "\f3d3";
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                cursor: pointer;
-                transform: rotate(0deg);
-                -webkit-transition: all 0.3s ease;
-                -o-transition: all 0.3s ease;
-                transition: all 0.3s ease;
+            #wrapper.toggled #sidebar-wrapper {
+                width: 0;
             }
 
-            #left-menu li.has-sub.rotate:after {
-                -webkit-transform: rotate(90deg);
-                -ms-transform: rotate(90deg);
-                -o-transform: rotate(90deg);
-                transform: rotate(90deg);
+            #page-content-wrapper {
+                padding: 20px;
+                position: relative;
             }
 
-            .small-logo {
-                display: none;
+            #wrapper.toggled #page-content-wrapper {
+                position: relative;
+                margin-right: 0;
             }
-
         }
     </style>
-
-    <script>
-        $('#toggle-left-menu').click(function () {
-            if ($('#left-menu').hasClass('small-left-menu')) {
-                $('#left-menu').removeClass('small-left-menu');
-            } else {
-                $('#left-menu').addClass('small-left-menu');
-            }
-            $('#logo').toggleClass('small-left-menu');
-            $('#page-container').toggleClass('small-left-menu');
-            $('#header .header-left').toggleClass('small-left-menu');
-
-            $('#logo .big-logo').toggle('300');
-            $('#logo .small-logo').toggle('300');
-            $('#logo').toggleClass('p-0 pl-1');
-        });
-
-        $(document).on('mouseover', '#left-menu.small-left-menu > ul > li', function () {
-            if (!$(this).hasClass('has-sub')) {
-                var label = $(this).find('span').text();
-                var position = $(this).position();
-                $('#show-lable').css({
-                    'top': position.top + 79,
-                    'left': position.left + 59,
-                    'opacity': 1,
-                    'visibility': 'visible'
-                });
-
-                $('#show-lable').text(label);
-            } else {
-                var position = $(this).position();
-                $(this).find('ul').addClass('open');
-
-                if ($(this).find('ul').hasClass('open')) {
-                    const height = 47;
-                    var count_submenu_li = $(this).find('ul > li').length;
-                    if (position.top >= 580) {
-                        var style = {
-                            'top': (position.top + 100) - (height * count_submenu_li),
-                            'height': height * count_submenu_li + 'px'
-                        }
-                        $(this).find('ul.open').css(style);
-                    } else {
-                        var style = {
-                            'top': position.top + 79,
-                            'height': height * count_submenu_li + 'px'
-                        }
-
-                        $(this).find('ul.open').css(style);
-                    }
-
-                }
-            }
-
-        });
-
-        $(document).on('mouseout', '#left-menu.small-left-menu li a', function (e) {
-            $('#show-lable').css({
-                'opacity': 0,
-                'visibility': 'hidden'
-            });
-        });
-
-        $(document).on('mouseout', '#left-menu.small-left-menu li.has-sub', function (e) {
-            $(this).find('ul').css({
-                'height': 0,
-            });
-        });
-
-        $(window).resize(function () {
-            windowResize();
-        });
-
-        $(window).on('load', function () {
-            windowResize();
-        });
-
-        $('#left-menu li.has-sub > a').click(function () {
-            var _this = $(this).parent();
-
-            _this.find('ul').toggleClass('open');
-            $(this).closest('li').toggleClass('rotate');
-
-            _this.closest('#left-menu').find('.open').not(_this.find('ul')).removeClass('open');
-            _this.closest('#left-menu').find('.rotate').not($(this).closest('li')).removeClass('rotate');
-            _this.closest('#left-menu').find('ul').css('height', 0);
-
-            if (_this.find('ul').hasClass('open')) {
-                const height = 47;
-                var count_submenu_li = _this.find('ul > li').length;
-                _this.find('ul').css('height', height * count_submenu_li + 'px');
-            }
-        });
-
-
-        function windowResize() {
-            var width = $(window).width();
-            if (width <= 992) {
-                $('#left-menu').addClass('small-left-menu');
-                $('#logo').addClass('small-left-menu p-0 pl-1');
-            } else {
-                $('#left-menu').removeClass('small-left-menu');
-                $('#logo').removeClass('small-left-menu p-0 pl-1');
-            }
-        }
-    </script>
 @endsection
