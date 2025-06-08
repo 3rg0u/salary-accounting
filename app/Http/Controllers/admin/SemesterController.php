@@ -37,9 +37,9 @@ class SemesterController extends Controller
                 return back()->withErrors('Đã có kì học khác đang diễn ra trong thời gian này!');
 
 
-            if ($start->lte($year_start))
+            if ($start->lt($year_start))
                 return back()->withErrors(['errors' => 'Ngày bắt đầu học kì không được nằm trước ngày bắt đầu của năm học!']);
-            if ($end->gte($year_end))
+            if ($end->gt($year_end))
                 return back()->withErrors(['errors' => 'Ngày kết thúc học kì không được nằm sau ngày kết thúc năm học!']);
 
             if ($start->gte($end)) {

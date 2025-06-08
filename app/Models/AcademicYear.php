@@ -25,6 +25,25 @@ class AcademicYear extends Model
         return $this->hasMany(Semester::class, 'aca_year', 'code');
     }
 
+    public function wage()
+    {
+        return $this->hasOne(Wage::class, 'year_code', 'code');
+    }
+
+
+    public function cls_coeff()
+    {
+        return $this->hasOne(ClassCoeff::class, 'year_code', 'code');
+    }
+
+
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class, 'year_code', 'code');
+    }
+
+
+
 
     public function scopeOpening($query)
     {

@@ -15,47 +15,62 @@
             </button>
         </div>
         <div class="content-display">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Mã lớp</th>
-                        <th scope="col">Giảng viên phụ trách</th>
-                        <th scope="col">Số sinh viên`</th>
-                        <th scope="col">Hệ số lớp</th>
-                        <th scope="col">Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($classes as $class)
+            <form class="fluid-container d-flex flex-column gap-5" action="{{route('admin.classes.assign')}}" method="POST">
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success btn-lg d-flex align-items-center gap-1">
+                        <ion-icon name="save-outline"></ion-icon>
+                        <span>Lưu thông tin</span>
+                    </button>
+                </div>
+                @method('PUT')
+                @csrf
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td>{{$class->code}}</td>
-                            <td>
-                                @if ($class->professor == null)
-                                    -
-                                @else
-                                    {{$class->professor->fullname}}
-                                @endif
-                            </td>
-                            <td>{{$class->std_nums}}</td>
-                            <td>{{$class->coeff}}</td>
-                            <td class="d-flex flex-row justify-content-start gap-2">
-                                <button type="button" class="btn btn-info btn-sm d-flex align-items-center gap-1"
-                                    data-bs-toggle="modal" data-bs-target="#_assignProfessor_{{$class->code}}">
-                                    <ion-icon name="add-circle-outline"></ion-icon>
-                                    <span>Chỉ định giảng viên</span>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1"
-                                    data-bs-toggle="modal" data-bs-target="#_dropClass_{{$class->code}}">
-                                    <ion-icon name="stop-circle-outline"></ion-icon>
-                                    <span>Đóng lớp</span>
-                                </button>
-                                @include('admin.classes.components.assign', ['class' => $class])
-                                @include('admin.classes.components.close', ['class' => $class])
-                            </td>
+                            <th scope="col">Mã lớp</th>
+                            <th scope="col">Số sinh viên</th>
+                            <th scope="col">Hệ số lớp</th>
+                            <th scope="col">Giảng viên phụ trách</th>
+                            <th scope="col">Hành động</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($classes as $class)
+                            <tr>
+                                <td>{{$class->code}}</td>
+                                <td>{{$class->std_nums}}</td>
+                                <td>{{$class->coeff}}</td>
+                                <td>
+                                    <select name="profs[{{$class->code}}]" class="form-select">
+                                        @if ($class->prof_id == null)
+                                            <option selected hidden value="">Chọn giảng viên</option>
+                                            @foreach($class->course->blfalculty->professors as $prof)
+                                                <option value="{{ $prof->pid }}">{{ $prof->fullname }}</option>
+                                            @endforeach
+                                        @else
+                                            @foreach($class->course->blfalculty->professors as $prof)
+                                                @if ($prof->pid == $class->prof_id)
+                                                    <option value="{{ $prof->pid }}" selected>{{ $prof->fullname }}</option>
+                                                @else
+                                                    <option value="{{ $prof->pid }}">{{ $prof->fullname }}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1"
+                                        data-bs-toggle="modal" data-bs-target="#_dropClass_{{$class->code}}">
+                                        <ion-icon name="stop-circle-outline"></ion-icon>
+                                        <span>Đóng lớp học phần</span>
+                                    </button>
+                                    {{-- @include('admin.classes.components.close', ['class' => $class]) --}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 

@@ -3,21 +3,23 @@
 @section('content')
     <div class="header alert alert-info">
         <p style="text-align: center" class="h1">Quản Lý Lớp Học Phần</p>
-        <p style="text-align: center" class="h3">Năm học {{$year->code}}</p>
-        <p style="text-align: center" class="h3">Học kỳ {{$semester->code}}</p>
+        @if ($semester->exists())
+            <p style="text-align: center" class="h3">Năm học {{$semester->academicyear->code}}</p>
+            <p style="text-align: center" class="h3">Học kỳ {{$semester->code}}</p>
+
+        @else
+
+            <p style="text-align: center" class="h3">Hiện không có học kỳ nào được mở</p>
+        @endif
     </div>
 
     <div class="body">
         <div class="navigation d-flex justify-content-end">
         </div>
+
         <div class="content-display">
-            @if ($semester == null)
-                <div class="fluid-continer d-flex align-items-center justify-content-center">
-                    <p class="h3">Hiện tại không có học kì nào đang diễn ra</p>
+            @if ($semester->exists())
 
-                </div>
-
-            @else
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -46,6 +48,10 @@
                         @endforeach
                     </tbody>
                 </table>
+            @else
+                <div class="fluid-continer d-flex align-items-center justify-content-center">
+                    <p class="h3">Hiện tại không có học kì nào đang diễn ra</p>
+                </div>
             @endif
         </div>
     </div>

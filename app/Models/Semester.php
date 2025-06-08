@@ -33,6 +33,13 @@ class Semester extends Model
     }
 
 
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class, 'sem_code', 'code');
+    }
+
+
+
     public function openedClasses()
     {
         return $this->hasMany(OfferedCourse::class, 'sem_code', 'code');

@@ -37,4 +37,10 @@ class OfferedCourse extends Model
     }
 
 
+    public function salary()
+    {
+        return $this->hasOne(Salary::class, 'cls_code', 'code');
+    }
+
+
 }

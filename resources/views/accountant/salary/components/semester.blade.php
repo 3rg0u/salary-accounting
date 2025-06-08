@@ -1,5 +1,6 @@
-<div class="modal fade" id="_historyYear_{{$year->code}}" tabindex="-1" aria-labelledby="editInfor" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="_salaries_year_{{$year->code}}" tabindex="-1" aria-labelledby="editInfor"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editInfor">Danh sách học kì đã mở trong năm học {{$year->code}}</h5>
@@ -13,9 +14,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">Mã học kì</th>
-                                <th scope="col">Thời gian bắt đầu</th>
-                                <th scope="col">Thời gian kết thúc</th>
-                                <th scope="col">Số LHP đã mở</th>
+                                <th scope="col">Tổng LHP</th>
+                                <th scope="col">Tổng Lương</th>
                                 <th scope="col">Hành động</th>
 
                             </tr>
@@ -24,14 +24,13 @@
                             @foreach ($year->semesters as $semester)
                                 <tr>
                                     <td>{{$semester->code}}</td>
-                                    <td>{{$semester->start}}</td>
-                                    <td>{{$semester->end}}</td>
                                     <td>{{$semester->openedClasses->count()}}</td>
+                                    <td>{{ number_format($semester->salaries->sum('amount'), 0, ',', '.') }}₫</td>
                                     <td class="d-flex flex-row justify-content-start gap-2 flex-shrink-0">
                                         <button class="btn btn-info btn-md d-flex gap-1 align-items-center"
-                                            onclick="window.location.href='{{ route('admin.classes.history.show', ['semester' => $semester->code])}}'">
+                                            onclick="window.location.href='{{ route('accountant.salary.detail', ['semester' => $semester->code])}}'">
                                             <ion-icon name="information-circle-outline"></ion-icon>
-                                            <span>Xem chi tiết các lớp học phần đã mở</span>
+                                            <span>Xem chi tiết các hóa đơn</span>
                                         </button>
                                     </td>
                                 </tr>

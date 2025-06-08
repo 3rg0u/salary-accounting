@@ -22,7 +22,7 @@ class AuthenticateController extends Controller
             'password' => 'required',
         ]);
 
-        // dd($credentials);
+
         if (Auth::attempt($credentials)) {
             request()->session()->regenerate();
 
@@ -30,13 +30,12 @@ class AuthenticateController extends Controller
              * @var User $user
              */
             $user = Auth::user();
-            dd($user);
             if ($user->isProfessor()) {
                 return redirect()->route('professor');
             } else if ($user->isAdmin()) {
                 return redirect()->route('admin.falculty.index');
             }
-            return redirect()->route('accountant.index');
+            return redirect()->route('accountant.degree.index');
         }
 
         return back()->withErrors([

@@ -38,7 +38,7 @@ class AccountantController extends Controller
             User::create(
                 [
                     'email' => $valid['email'],
-                    'password' => Hash::make($valid['email']),
+                    'password' => Hash::make($valid['password']),
                     'role' => 'accountant'
                 ]
             );

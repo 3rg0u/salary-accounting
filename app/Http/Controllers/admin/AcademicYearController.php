@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicYear;
+use App\Models\ClassCoeff;
 use App\Models\Semester;
+use App\Models\Wage;
 use Carbon\Carbon;
 use DateTime;
 use Exception;
@@ -42,8 +44,8 @@ class AcademicYearController extends Controller
             $end = Carbon::parse($valid['end']);
 
 
-            if ($start->lt(Carbon::now()) || $end->lt(Carbon::now()))
-                return back()->withErrors(['error' => "Không thể mở năm học mới trong quá khứ!"]);
+            // if ($start->lt(Carbon::now()) || $end->lt(Carbon::now()))
+            //     return back()->withErrors(['error' => "Không thể mở năm học mới trong quá khứ!"]);
 
             $conflict = AcademicYear::where('start', '<', $end)->where('end', '>', $start)->exists();
             if ($conflict)
@@ -65,6 +67,18 @@ class AcademicYearController extends Controller
                     'code' => $code,
                     'start' => $start,
                     'end' => $end
+                ]
+            );
+
+            Wage::create(
+                [
+                    'year_code' => $code,
+                ]
+            );
+
+            ClassCoeff::create(
+                [
+                    'year_code' => $code
                 ]
             );
             return redirect()->route('admin.affairs.index')->with('success', 'Mở năm học mới thành công!');

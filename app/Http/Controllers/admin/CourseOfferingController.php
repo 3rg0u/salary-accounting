@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicYear;
+use App\Models\ClassCoeff;
 use App\Models\Course;
 use App\Models\Falculty;
 use App\Models\OfferedCourse;
@@ -22,9 +23,8 @@ class CourseOfferingController extends Controller
     public function index()
     {
         $semester = Semester::opening();
-        $year = $semester->academicyear;
         $falculties = Falculty::all();
-        return view('admin.classes.index', ['year' => $year, 'semester' => $semester, 'falculties' => $falculties]);
+        return view('admin.classes.index', ['semester' => $semester, 'falculties' => $falculties]);
     }
 
 
@@ -60,7 +60,8 @@ class CourseOfferingController extends Controller
                     [
                         'falculty' => $falculty,
                         'sem_code' => $semester->code,
-                        'code' => self::genCode()
+                        'code' => self::genCode(),
+                        'coeff' => ClassCoeff::evalCoeff($valid['std_nums'])
                     ]
                 );
                 OfferedCourse::create($data);
@@ -86,14 +87,23 @@ class CourseOfferingController extends Controller
     }
 
 
-    public function assign(Request $request, $class)
+    public function assign(Request $request)
     {
         try {
-            $professor = $request->validate(
-                ['prof_id' => 'required|exists:professors,pid']
+
+
+            $data = $request->validate(
+                [
+                    'profs' => 'array|required',
+                    'profs.*' => 'nullable|string|exists:professors,pid'
+                ]
             );
 
-            OfferedCourse::firstWhere('code', $class)->update($professor);
+
+            foreach ($data['profs'] as $code => $pid) {
+                OfferedCourse::firstWhere('code', $code)->update(['prof_id' => $pid]);
+            }
+
             return back()->with('success', 'Thêm giảng viên phụ trách thành công!');
         } catch (Exception $err) {
             return back()->withErrors(['error' => $err->getMessage()]);

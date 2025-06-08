@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\accountant\ClassController;
+use App\Http\Controllers\accountant\DegreeController as AccountantDegreeController;
+use App\Http\Controllers\accountant\SalaryController;
+use App\Http\Controllers\accountant\WageController;
 use App\Http\Controllers\admin\AcademicYearController;
 use App\Http\Controllers\admin\AccountantController;
 use App\Http\Controllers\admin\CourseController;
@@ -10,14 +14,14 @@ use App\Http\Controllers\admin\ProfessorController;
 use App\Http\Controllers\admin\SemesterController;
 use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\auth\AuthenticateController;
-use App\Models\AcademicYear;
-use App\Models\Course;
-use App\Models\Falculty;
+use App\Models\Professor;
+use App\Models\Salary;
 use App\Models\Semester;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -140,7 +144,7 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             Route::get('/show/{semes}/{falculty}', [CourseOfferingController::class, 'show'])->name('admin.classes.show');
             Route::post('/create/{falculty}', [CourseOfferingController::class, 'store'])->name('admin.classes.create');
             Route::get('/details/{semes}/{course}', [CourseOfferingController::class, 'detail'])->name('admin.classes.detail');
-            Route::put('/assign/{class}', [CourseOfferingController::class, 'assign'])->name('admin.classes.assign');
+            Route::put('/assign', [CourseOfferingController::class, 'assign'])->name('admin.classes.assign');
             Route::delete('/close/{class}', [CourseOfferingController::class, 'close'])->name('admin.classes.close');
             Route::delete('/close-all/{course}', [CourseOfferingController::class, 'closeall'])->name('admin.classes.closeall');
             Route::get('/history', [CourseOfferingController::class, 'history'])->name('admin.classes.history');
@@ -159,10 +163,38 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
 
 Route::middleware(['auth', 'accountant.assert'])->group(function () {
     Route::prefix('/accountant')->group(function () {
-        Route::get('/', function () {
-            return 'abc';
-        })->name('accountant.index');
 
+
+        // degree's coefficients mng
+        Route::prefix('/degrees')->group(function () {
+            Route::get('/', [AccountantDegreeController::class, 'index'])->name('accountant.degree.index');
+            Route::put('/config', [AccountantDegreeController::class, 'config'])->name('accountant.degree.config');
+        });
+
+
+        // staff's wages mng
+
+        Route::prefix('/wages')->group(function () {
+            Route::get('/', [WageController::class, 'index'])->name('accountant.wage.index');
+            Route::put('/config', [WageController::class, 'config'])->name('accountant.wage.config');
+        });
+
+
+        // class coeff
+
+        Route::prefix('/classes')->group(function () {
+            Route::get('/', [ClassController::class, 'index'])->name('accountant.class.index');
+            Route::put('/config', [ClassController::class, 'config'])->name('accountant.class.config');
+        });
+
+
+        // salary accounting
+
+        Route::prefix('/salaries')->group(function () {
+            Route::get('/', [SalaryController::class, 'index'])->name('accountant.salary.index');
+            Route::post('/eval', [SalaryController::class, 'eval_salary'])->name('accountant.salary.eval');
+            Route::get('/detail/{semester}', [SalaryController::class, 'detail'])->name('accountant.salary.detail');
+        });
 
     });
 });
@@ -189,5 +221,6 @@ Route::post('/reg', function (Request $request) {
 
 
 Route::get('/test', function () {
-    return Semester::first()->openedClasses;
+    return Salary::all()->groupBy('prof_id');
 });
+
