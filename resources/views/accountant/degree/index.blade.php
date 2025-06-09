@@ -32,6 +32,7 @@
                             <tr>
                                 <th scope="col">Tên đầy đủ</th>
                                 <th scope="col">Tên viết tắt</th>
+                                <th scope="col">Số lượng GV</th>
                                 <th scope="col">Hệ số</th>
                             </tr>
                         </thead>
@@ -40,6 +41,7 @@
                                 <tr>
                                     <td>{{$degree->fullname}}</td>
                                     <td>{{$degree->abbreviation}}</td>
+                                    <td>{{$degree->profs->count()}}</td>
                                     <td>
                                         <input style="width: 50px" type="number" name="coeffs[{{$degree->abbreviation}}]"
                                             value="{{$degree->coeff}}" min="0" step="0.01">

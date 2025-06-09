@@ -40,6 +40,8 @@
                     <thead>
                         <tr>
                             <th scope="col">Mã năm học</th>
+                            <th scope="col">Thời gian bắt đầu</th>
+                            <th scope="col">Thời gian kết thúc</th>
                             <th scope="col">Hệ số <b>a</b></th>
                             <th scope="col">Hệ số <b>b</b></th>
                         </tr>
@@ -48,6 +50,8 @@
                         @foreach ($coeffs as $coeff)
                             <tr>
                                 <td>{{$coeff->year_code}}</td>
+                                <td>{{$coeff->academic_year->start}}</td>
+                                <td>{{$coeff->academic_year->end}}</td>
                                 <td>{{$coeff->lowerbound}}</td>
                                 <td>{{$coeff->upperbound}}</td>
                             </tr>

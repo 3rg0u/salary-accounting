@@ -34,7 +34,7 @@ class WageController extends Controller
                 $valid
             );
 
-            return back()->with('success', 'Cập nhật thông tin thành công!');
+            return back()->with('success', 'Thiết lập thành công!');
 
         } catch (Exception $err) {
             return back()->withErrors(['error' => $err->getMessage()]);

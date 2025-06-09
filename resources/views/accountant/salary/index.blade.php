@@ -31,7 +31,7 @@
                             <th scope="col">Thời gian bắt đầu</th>
                             <th scope="col">Thời gian kết thúc</th>
                             <th scope="col">Số học kỳ đã mở</th>
-                            <th scope="col">Tổng số tiền lương đã chi trả</th>
+                            <th scope="col">Tổng số tiền lương phải chi trả</th>
                             <th scope="col">Hành động</th>
                         </tr>
                     </thead>
