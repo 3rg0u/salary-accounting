@@ -33,9 +33,10 @@ class Professor extends Model
     }
 
 
-    public function salaries()
+    public function salaries($sem)
     {
-        return $this->hasMany(Salary::class, 'prof_id', 'pid');
+        $semester = ($sem == null) ? Semester::opening() : Semester::firstWhere('code', $sem);
+        return $semester->salaries()->where('prof_id', $this->pid)->get();
     }
 
 

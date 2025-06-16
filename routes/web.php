@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\accountant\ClassController;
 use App\Http\Controllers\accountant\DegreeController as AccountantDegreeController;
+use App\Http\Controllers\accountant\ReportSalaryController as AccountantReportSalaryController;
 use App\Http\Controllers\accountant\SalaryController;
 use App\Http\Controllers\accountant\WageController;
 use App\Http\Controllers\admin\AcademicYearController;
@@ -11,11 +12,14 @@ use App\Http\Controllers\admin\CourseOfferingController;
 use App\Http\Controllers\admin\DegreeController;
 use App\Http\Controllers\admin\FalcultyController;
 use App\Http\Controllers\admin\ProfessorController;
+use App\Http\Controllers\admin\ReportSalaryController;
 use App\Http\Controllers\admin\SemesterController;
 use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\auth\AuthenticateController;
-use App\Models\Professor;
-use App\Models\Salary;
+use App\Http\Middleware\Professor;
+use App\Models\AcademicYear;
+use App\Models\Falculty;
+use App\Models\OfferedCourse;
 use App\Models\Semester;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -157,6 +161,16 @@ Route::middleware(['auth', 'admin.assert'])->group(function () {
             Route::post('/', [AccountantController::class, 'store'])->name('admin.account.create');
         });
 
+
+        Route::prefix('/reports')->group(function () {
+            Route::get('/', [ReportSalaryController::class, 'index'])->name('admin.report.index');
+            Route::get('/semester/{sem_code}', [ReportSalaryController::class, 'show'])->name('admin.report.show');
+            Route::prefix('/all')->group(function () {
+                Route::get('/', [ReportSalaryController::class, 'allIndex'])->name('admin.report.all.index');
+                Route::get('/show/{sem_code}', [ReportSalaryController::class, 'allShow'])->name('admin.report.all.show');
+            });
+        });
+
     });
 });
 
@@ -196,8 +210,25 @@ Route::middleware(['auth', 'accountant.assert'])->group(function () {
             Route::get('/detail/{semester}', [SalaryController::class, 'detail'])->name('accountant.salary.detail');
         });
 
+
+
+        Route::prefix('/reports')->group(function () {
+            Route::get('/', [AccountantReportSalaryController::class, 'index'])->name('accountant.report.index');
+            Route::get('/semester/{sem_code}', [AccountantReportSalaryController::class, 'show'])->name('accountant.report.show');
+            Route::prefix('/all')->group(function () {
+                Route::get('/', [AccountantReportSalaryController::class, 'allIndex'])->name('accountant.report.all.index');
+                Route::get('/show/{sem_code}', [AccountantReportSalaryController::class, 'allShow'])->name('accountant.report.all.show');
+            });
+        });
+
     });
 });
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/signout', [AuthenticateController::class, 'handleSignOut'])->name('signout');
+});
+
 
 
 Route::get('/reg', function () {
@@ -219,8 +250,6 @@ Route::post('/reg', function (Request $request) {
 })->name('reg');
 
 
-
 Route::get('/test', function () {
-    return Salary::all()->groupBy('prof_id');
-});
 
+});

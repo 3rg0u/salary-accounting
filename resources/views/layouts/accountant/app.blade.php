@@ -35,12 +35,24 @@
                         <p class="white-text m-0">QL Tiền Lương</p>
                     </a>
                 </li>
-                <div class="d-flex flex-column justify-content-end">
-                    <form action="{{url('/signout')}}" method="post">
+                <li>
+                    <a href="{{route('accountant.report.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="albums-outline"></ion-icon>
+                        <p class="white-text m-0">TK Lương Theo Năm Học</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('accountant.report.all.index')}}" class="h6 d-flex align-items-center ps-4 py-3 my-4">
+                        <ion-icon name="albums-outline"></ion-icon>
+                        <p class="white-text m-0">TK Lương Toàn Trường</p>
+                    </a>
+                </li>
+                <div class="signout-section">
+                    <form action="{{route('signout')}}" method="post">
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-md d-flex gap-1 align-items-center ms-4">
-                            <p class="white-text m-0">Sign out</p>
+                        <button type="submit" class="btn btn-danger btn-md d-flex align-items-center py-3">
                             <ion-icon name="log-out-outline"></ion-icon>
+                            <span class="white-text">Đăng xuất</span>
                         </button>
                     </form>
                 </div>

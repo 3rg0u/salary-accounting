@@ -8,6 +8,7 @@ use App\Models\ClassCoeff;
 use App\Models\Course;
 use App\Models\Falculty;
 use App\Models\OfferedCourse;
+use App\Models\Salary;
 use App\Models\Semester;
 use Carbon\Carbon;
 use Exception;
@@ -95,16 +96,23 @@ class CourseOfferingController extends Controller
             $data = $request->validate(
                 [
                     'profs' => 'array|required',
-                    'profs.*' => 'nullable|string|exists:professors,pid'
+                    'profs.*' => 'nullable|string|exists:professors,pid',
+                    'classes' => 'array|required',
+                    'classes.*' => 'nullable'
                 ]
             );
-
 
             foreach ($data['profs'] as $code => $pid) {
                 OfferedCourse::firstWhere('code', $code)->update(['prof_id' => $pid]);
             }
 
-            return back()->with('success', 'Thêm giảng viên phụ trách thành công!');
+            Salary::whereIn('cls_code', array_keys($data['classes']))->delete();
+            OfferedCourse::whereIn('code', array_keys($data['classes']))->delete();
+
+
+
+
+            return back()->with('success', 'Lưu thông tin thành công!');
         } catch (Exception $err) {
             return back()->withErrors(['error' => $err->getMessage()]);
         }
@@ -125,7 +133,9 @@ class CourseOfferingController extends Controller
     public function closeall($course)
     {
         try {
-            OfferedCourse::where('course_code', $course)->delete();
+            $classes = OfferedCourse::where('course_code', $course)->pluck('code');
+            Salary::whereIn('cls_code', $classes)->delete();
+            OfferedCourse::whereIn('code', $classes)->delete();
             return back()->with('success', 'Đóng học phần thành công!');
         } catch (Exception $err) {
             return back()->withErrors(['error' => $err->getMessage()]);

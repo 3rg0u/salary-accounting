@@ -23,7 +23,7 @@ class ClassCoeff extends Model
         $upper = $coeff->upperbound;
         $lower = $coeff->lowerbound;
 
-        if ($num < $lower - 20)
+        if ($num <= $lower - 20)
             $index = 0;
         elseif ($num < $upper - 20)
             $index = 1;
@@ -35,7 +35,7 @@ class ClassCoeff extends Model
             $index = 4;
         elseif ($num < $upper + 20)
             $index = 5;
-        elseif ($num > $upper + 20)
+        elseif ($num >= $upper + 20)
             $index = 6;
         $nums = [-0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3];
 

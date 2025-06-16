@@ -26,7 +26,7 @@
                             <th scope="col">Tên khoa</th>
                             <th scope="col">Tên viết tắt</th>
                             <th scope="col">Số học phần đã mở đăng ký</th>
-                            <th scope="col">Số học phần đã mở đăng ký lớp</th>
+                            <th scope="col">Số lớp học phần đã mở</th>
                             <th scope="col">Hành động</th>
                         </tr>
                     </thead>

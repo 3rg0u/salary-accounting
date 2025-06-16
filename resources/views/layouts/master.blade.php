@@ -13,12 +13,12 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <title>Salary Accounting</title>
-
-
 </head>
 
 <body>
+    @yield('body')
     <style>
         ion-icon {
             font-size: 24px;
@@ -59,7 +59,6 @@
             -moz-appearance: textfield;
         }
     </style>
-    @yield('body')
 </body>
 
 

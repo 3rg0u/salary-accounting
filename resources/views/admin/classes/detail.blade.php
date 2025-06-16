@@ -31,7 +31,7 @@
                             <th scope="col">Số sinh viên</th>
                             <th scope="col">Hệ số lớp</th>
                             <th scope="col">Giảng viên phụ trách</th>
-                            <th scope="col">Hành động</th>
+                            <th scope="col">Đóng lớp</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,12 +59,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1"
-                                        data-bs-toggle="modal" data-bs-target="#_dropClass_{{$class->code}}">
-                                        <ion-icon name="stop-circle-outline"></ion-icon>
-                                        <span>Đóng lớp học phần</span>
-                                    </button>
-                                    {{-- @include('admin.classes.components.close', ['class' => $class]) --}}
+                                    <input type="checkbox" name="classes[{{$class->code}}]">
                                 </td>
                             </tr>
                         @endforeach

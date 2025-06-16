@@ -24,12 +24,17 @@ class Falculty extends Model
     }
 
 
+    public function salaries()
+    {
+        return $this->hasManyThrough(Salary::class, Professor::class, 'falculty', 'prof_id', 'abbreviation', 'pid');
+    }
+
     public function openedclasses($semester_code = null)
     {
 
         $semester = ($semester_code == null) ? Semester::opening() : Semester::where('code', $semester_code)->get()->firstOrFail();
         $codes = $this->courses()->pluck('code');
-        return OfferedCourse::whereIn('course_code', $codes)->get();
+        return $semester->openedClasses()->whereIn('course_code', $codes)->get();
     }
 
     public function openedcourses($semester_code = null)
