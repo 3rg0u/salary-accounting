@@ -21,7 +21,7 @@
                         <input type="number" class="form-control w-100" id="cls_hours" name="cls_hours">
                     </div>
                     <div class="mb-3">
-                        <label for="coeff" class="form-label">Hệ số lớp:</label>
+                        <label for="coeff" class="form-label">Hệ số học phần:</label>
                         <input type="number" min="0" step="0.1" class="form-control w-100" id="coeff" name="coeff">
                     </div>
                     <div class="modal-footer">

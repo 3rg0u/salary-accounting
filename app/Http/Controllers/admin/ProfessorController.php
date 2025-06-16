@@ -38,12 +38,12 @@ class ProfessorController extends Controller
     {
         $valid = $request->validate(
             [
-                'fullname' => 'required|string|min:8|max:255',
-                'email' => 'required|email|unique:users',
+                'fullname' => 'required|string|min:5',
+                'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
                 'password-confirm' => 'required|string|min:8',
-                'falculty' => 'nullable',
-                'refs' => 'nullable',
+                'falculty' => 'required|exists:falculties,abbreviation',
+                'refs' => 'required|exists:degress,abbreviation',
             ]
         );
         if ($valid['password'] != $valid['password-confirm']) {
@@ -82,10 +82,10 @@ class ProfessorController extends Controller
         try {
             $valid = $request->validate(
                 [
-                    'fullname' => 'nullable|string|min:8|max:255',
-                    'email' => 'nullable|email',
-                    'falculty' => 'nullable',
-                    'refs' => 'nullable'
+                    'fullname' => 'nullable|string|min:5',
+                    'email' => 'nullable|email|unique:users,email',
+                    'falculty' => 'required|exists:falculties,abbreviation',
+                    'refs' => 'required|exists:degrees,abbreviation'
                 ]
             );
 

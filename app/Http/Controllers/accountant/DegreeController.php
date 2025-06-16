@@ -24,7 +24,7 @@ class DegreeController extends Controller
             $data = $request->validate(
                 [
                     'coeffs' => 'array|required',
-                    'coeffs.*' => 'nullable|numeric|min:1'
+                    'coeffs.*' => 'required|numeric|min:1|max:3'
                 ]
             );
             foreach ($data['coeffs'] as $abbr => $coeff) {

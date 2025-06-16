@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use DateTime;
 use Exception;
 use Illuminate\Http\Request;
-use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class AcademicYearController extends Controller
 {
@@ -44,8 +43,8 @@ class AcademicYearController extends Controller
             $end = Carbon::parse($valid['end']);
 
 
-            // if ($start->lt(Carbon::now()) || $end->lt(Carbon::now()))
-            //     return back()->withErrors(['error' => "Không thể mở năm học mới trong quá khứ!"]);
+            if ($start->lt(Carbon::now()) || $end->lt(Carbon::now()))
+                return back()->withErrors(['error' => "Không thể mở năm học mới trong quá khứ!"]);
 
             $conflict = AcademicYear::where('start', '<', $end)->where('end', '>', $start)->exists();
             if ($conflict)
