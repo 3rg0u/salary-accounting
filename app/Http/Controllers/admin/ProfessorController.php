@@ -42,8 +42,8 @@ class ProfessorController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
                 'password-confirm' => 'required|string|min:8',
-                'falculty' => 'required|exists:falculties,abbreviation',
-                'refs' => 'required|exists:degress,abbreviation',
+                'falculty' => 'required',
+                'refs' => 'required',
             ]
         );
         if ($valid['password'] != $valid['password-confirm']) {
@@ -84,8 +84,8 @@ class ProfessorController extends Controller
                 [
                     'fullname' => 'nullable|string|min:5',
                     'email' => 'nullable|email|unique:users,email',
-                    'falculty' => 'required|exists:falculties,abbreviation',
-                    'refs' => 'required|exists:degrees,abbreviation'
+                    'falculty' => 'required',
+                    'refs' => 'required'
                 ]
             );
 

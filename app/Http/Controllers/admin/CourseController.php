@@ -62,7 +62,7 @@ class CourseController extends Controller
         try {
             $valid = $request->validate(
                 [
-                    'name' => 'required|string|min:5|max:50|unique:courses',
+                    'name' => 'required|string|min:5|max:50|unique:courses,name',
                     'cred_hours' => 'required|numeric|min:1|max:10',
                     'cls_hours' => 'required|numeric|min:15|max:45',
                     'coeff' => 'nullable|numeric|min:1|max:3'

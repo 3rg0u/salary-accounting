@@ -47,7 +47,7 @@ class FalcultyController extends Controller
             $falculty = Falculty::findOrFail($id);
             $data = $request->validate(
                 [
-                    'fullname' => 'required|string|min:15',
+                    'fullname' => 'required|string|min:5',
                     'abbreviation' => 'required|string|min:2',
                     'description' => 'nullable'
                 ]

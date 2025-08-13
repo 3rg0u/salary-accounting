@@ -97,7 +97,7 @@ class CourseOfferingController extends Controller
                 [
                     'profs' => 'array|required',
                     'profs.*' => 'nullable|string|exists:professors,pid',
-                    'classes' => 'array|required',
+                    'classes' => 'array|nullable',
                     'classes.*' => 'nullable'
                 ]
             );
@@ -106,8 +106,8 @@ class CourseOfferingController extends Controller
                 OfferedCourse::firstWhere('code', $code)->update(['prof_id' => $pid]);
             }
 
-            Salary::whereIn('cls_code', array_keys($data['classes']))->delete();
-            OfferedCourse::whereIn('code', array_keys($data['classes']))->delete();
+            // Salary::whereIn('cls_code', array_keys($data['classes']))->delete();
+            // OfferedCourse::whereIn('code', array_keys($data['classes']))->delete();
 
 
 
